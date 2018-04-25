@@ -95,10 +95,16 @@ func parseEntry(lines []string) LogEvent {
 			switch attributeTypes[parts[0]] {
 			case attributeTypeString:
 				attributeValue = parts[1]
+				//			case attributeTypeBool:
+				//				v, err := strconv.ParseBool(parts[1])
+				//				if err == nil {
+				//					attributeValue = v
+				//				}
 			case attributeTypeBool:
-				v, err := strconv.ParseBool(parts[1])
-				if err == nil {
-					attributeValue = v
+				if strings.ToLower(parts[1]) == "yes" {
+					attributeValue = 1
+				} else if strings.ToLower(parts[1]) == "no" {
+					attributeValue = 0
 				}
 			case attributeTypeFloat:
 				v, err := strconv.ParseFloat(parts[1], 64)
