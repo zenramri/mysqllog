@@ -63,7 +63,8 @@ func (p *Parser) Flush() LogEvent {
 	return event
 }
 
-var userHostAttributesRe = regexp.MustCompile(`\b(User@Host: [\w\[\]]+ @ (?:)(\w+)?)|(Id:.+)`)
+//var userHostAttributesRe = regexp.MustCompile(`\b(User@Host: [\w\[\]]+ @ (?:)(\w+)?)|(Id:.+)`)
+var userHostAttributesRe = regexp.MustCompile(`\b(User@Host: [\w\[\]]+ @ (?P<host>[^#]+?)|(Id:.+)`)
 var attributesRe = regexp.MustCompile(`\b([\w_]+:\s+[^\s]+)\b`)
 
 // parseEntry actually parses lines that belong to a log event.
