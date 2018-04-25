@@ -37,4 +37,7 @@ var attributeTypes = map[string]int{
 	"InnoDB_rec_lock_wait":  attributeTypeFloat,
 	"InnoDB_queue_wait":     attributeTypeFloat,
 	"InnoDB_pages_distinct": attributeTypeInt,
+	"Log_slow_rate_type":    attributeTypeString,
+	"Log_slow_rate_limit":   attributeTypeInt,
+	"Admin":                 attributeTypeBool,
 }
