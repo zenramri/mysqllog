@@ -86,7 +86,8 @@ func parseEntry(lines []string) LogEvent {
 					event["User"] = strings.TrimSpace(strings.Split(userHostParts[0], "[")[0])
 					// event["Host"] = strings.TrimSpace(strings.Split(userHostParts[1], "[")[0])
 					event["Host"] = strings.Trim(strings.Split(userHostParts[1], "[")[1], " ]")
-					event["Thread_id"] = strings.TrimSpace(strings.Split(userHostParts[1], ":")[1])
+				case "Id":
+					thread_id := strings.TrimSpace(parts[1])
 				}
 			}
 			continue
