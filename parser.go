@@ -161,6 +161,8 @@ func parseEntry(lines []string) LogEvent {
 
 	event["Statement"] = strings.TrimSpace(strings.Join(queryLines, "\n"))
 
+	event["Comments"] = between(event["Statement"].(string), "/*", "*/")
+
 	return event
 }
 

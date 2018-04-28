@@ -40,4 +40,5 @@ var attributeTypes = map[string]int{
 	"Log_slow_rate_type":    attributeTypeString,
 	"Log_slow_rate_limit":   attributeTypeInt,
 	"Admin":                 attributeTypeBool,
+	"Comments":              attributeTypeString,
 }
