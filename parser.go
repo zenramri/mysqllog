@@ -66,6 +66,10 @@ func (p *Parser) Flush() LogEvent {
 //var userHostAttributesRe = regexp.MustCompile(`\b(User@Host: [\w\[\]]+ @ (?:)(\w+)?)|(Id:.+)`)
 var userHostAttributesRe = regexp.MustCompile(`\b(User@Host: [\w\[\]]+ @ (?:)(\w+)?) ([\.\[0-9\]]+)|(Id:.+)`)
 var attributesRe = regexp.MustCompile(`\b([\w_]+:\s+[^\s]+)\b`)
+var timeRe = regexp.MustCompile("^# Time: (?P<time>[^ ]+)Z *$")
+
+// var	oldTimeRe = regexp.MustCompile("^# Time: (?P<datetime>[0-9]+ [0-9:.]+)")
+// var	adminPingRe = regexp.MustCompile("^# administrator command: Ping; *$")
 
 // parseEntry actually parses lines that belong to a log event.
 func parseEntry(lines []string) LogEvent {
@@ -92,6 +96,16 @@ func parseEntry(lines []string) LogEvent {
 			}
 			continue
 		}
+
+		if strings.HasPrefix(line, "# Time") {
+			matches := timeRe.FindAllString(line, -1)
+			for _, match := range matches {
+				parts := strings.Split(match, ": ")
+				event["Time"] = parts[1]
+			}
+			continue
+		}
+
 		matches := attributesRe.FindAllString(line, -1)
 		for _, match := range matches {
 			parts := strings.Split(match, ": ")
